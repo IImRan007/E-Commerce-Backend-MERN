@@ -30,7 +30,7 @@ app.use(
 );
 
 // Routes
-// app.use("/api/restaurant", require("./routes/restaurantRoutes"));
+app.use("/api/user", require("./routes/userRoutes"));
 
 app.get("/", (_, res) => {
   res.status(200).json({ message: "E-Commerce API" });
