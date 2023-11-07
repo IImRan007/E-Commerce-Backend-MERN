@@ -8,7 +8,7 @@ const User = require("../models/userModel");
 // @route POST /api/user
 // @access Public
 const registerUser = asyncHandler(async (req, res) => {
-  const { username, email, password } = req?.body;
+  const { username, email, password, isAdmin } = req?.body;
 
   if (!username) {
     res.status(400);
@@ -42,6 +42,7 @@ const registerUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      admin: isAdmin,
       token: generateToken(user._id),
     });
   } else {
@@ -54,7 +55,7 @@ const registerUser = asyncHandler(async (req, res) => {
 // @route /api/user/login
 // @access Public
 const loginUser = asyncHandler(async (req, res) => {
-  const { email, password } = req?.body;
+  const { email, password, isAdmin } = req?.body;
 
   if (!email) {
     res.status(400);
@@ -72,6 +73,7 @@ const loginUser = asyncHandler(async (req, res) => {
       _id: user._id,
       username: user.username,
       email: user.email,
+      admin: user.isAdmin,
       token: generateToken(user._id),
     });
   } else {
@@ -88,6 +90,7 @@ const getMe = asyncHandler(async (req, res) => {
     id: req.user._id,
     email: req.user.email,
     username: req.user.username,
+    admin: req.user.isAdmin,
   };
 
   res.status(200).json(user);

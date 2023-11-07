@@ -21,7 +21,7 @@ connectDb();
 // Using Middleware
 app.use(express.json());
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -31,6 +31,8 @@ app.use(
 
 // Routes
 app.use("/api/user", require("./routes/userRoutes"));
+app.use("/api/category", require("./routes/categoryRoutes"));
+app.use("/api/product", require("./routes/productRoutes"));
 
 app.get("/", (_, res) => {
   res.status(200).json({ message: "E-Commerce API" });
