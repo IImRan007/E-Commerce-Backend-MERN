@@ -9,7 +9,6 @@ const productSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
-      unique: true,
     },
     productImage: {
       public_id: String,
